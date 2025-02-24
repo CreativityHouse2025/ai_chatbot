@@ -29,7 +29,7 @@ import { SuggestedActions } from "./suggested-actions";
 import equal from "fast-deep-equal";
 
 // Fixed prompt template
-const PROMPT_TEMPLATE = `write 3 bullet points, paraphrase a better prompting to ask    about: `;
+const PROMPT_TEMPLATE = `write 3 bullet points, paraphrase a better prompting to ask about: `;
 
 export function PureMultimodalInput({
   chatId,
@@ -60,33 +60,41 @@ export function PureMultimodalInput({
 
   // ... (keep existing useEffect and height adjustment logic)
 
-  const submitForm = useCallback(() => {
+  const submitForm = useCallback(async () => {
+    if (!input.trim()) return; // Prevent sending empty messages
+
     window.history.replaceState({}, "", `/chat/${chatId}`);
 
-    // Prepend the fixed prompt to user input
-    const promptedInput = PROMPT_TEMPLATE + input;
+    // Generate a unique ID for the user message
+    const userMessage: Message = {
+      id: crypto.randomUUID(),
+      role: "user",
+      content: input, // Store only the original user input in the UI
+    };
 
-    append(
+    // Append the user message to UI (what the user sees)
+    setMessages((prev) => [...prev, userMessage]);
+
+    // Send the full prompt to the AI model but don't show it in UI
+    await append(
       {
         role: "user",
-        content: promptedInput,
+        content: PROMPT_TEMPLATE + input, // This is what the AI receives
       },
       {
-        experimental_attachments: [], // Ensure no attachments
+        experimental_attachments: [],
       }
     );
 
-    setInput("");
+    setInput(""); // Clear input field
 
     if (width && width > 768) {
       textareaRef.current?.focus();
     }
-  }, [append, input, setInput, width, chatId]);
+  }, [append, input, setInput, width, chatId, setMessages]);
 
   return (
     <div className="relative w-full flex flex-col gap-4">
-    
-
       <Textarea
         ref={textareaRef}
         placeholder="Send a message..."

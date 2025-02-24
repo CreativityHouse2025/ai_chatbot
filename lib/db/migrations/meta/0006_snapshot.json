@@ -315,7 +315,7 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
-          "default": 100
+          "default": 300
         },
         "lastTokenReset": {
           "name": "lastTokenReset",

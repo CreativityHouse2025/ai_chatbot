@@ -14,17 +14,17 @@ export const models: Array<Model> = [
     id: 'gpt-4o-mini',
     label: 'GPT 4o mini',
     apiIdentifier: 'gpt-4o-mini',
-    description: 'Small model for fast, lightweight tasks',
+    description: 'This model for fast, lightweight tasks',
     rate: 10,
   },
-  {
-    id: 'gpt-4o',
-    label: 'GPT 4o',
-    apiIdentifier: 'gpt-4o',
-    description: 'For complex, multi-step tasks',
-    rate: 20,
+  // {
+  //   id: 'gpt-4o',
+  //   label: 'GPT 4o',
+  //   apiIdentifier: 'gpt-4o',
+  //   description: 'For complex, multi-step tasks',
+  //   rate: 20,
 
-  },
+  // },
   // New Gemini model
   // {
   //   id: 'gemini-pro',

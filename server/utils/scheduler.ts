@@ -5,8 +5,8 @@ import { user } from '@/lib/db/schema';
 // Function to reset tokens
 async function resetTokens() {
   try {
-    await db.update(user).set({ tokens: 100 }).execute();
-    console.log('Tokens reset to 100 successfully.');
+    await db.update(user).set({ tokens: 300 }).execute();
+    console.log('Tokens reset to 300 successfully.');
   } catch (error) {
     console.error('Error resetting tokens:', error);
   }

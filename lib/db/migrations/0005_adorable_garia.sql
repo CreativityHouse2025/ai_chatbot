@@ -1,1 +1,1 @@
-ALTER TABLE "User" ADD COLUMN "tokens" integer DEFAULT 100;
+ALTER TABLE "User" ADD COLUMN "tokens" integer DEFAULT 300;
